@@ -2,6 +2,7 @@ import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTable } from '@angular/material/table';
+import { RequestServerService } from '../request-server.service';
 import { ProductsTableDataSource, ProductsTableItem } from './products-table-datasource';
 
 @Component({
@@ -18,8 +19,10 @@ export class ProductsTableComponent implements AfterViewInit, OnInit {
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
   displayedColumns = ['id', 'name', 'description', 'category', 'units'];
 
+  constructor(private productsApi: RequestServerService) {}
+
   ngOnInit() {
-    this.dataSource = new ProductsTableDataSource();
+    this.dataSource = new ProductsTableDataSource(this.productsApi);
   }
 
   ngAfterViewInit() {

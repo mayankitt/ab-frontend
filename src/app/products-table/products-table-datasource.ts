@@ -3,6 +3,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { map } from 'rxjs/operators';
 import { Observable, of as observableOf, merge } from 'rxjs';
+import { RequestServerService } from '../request-server.service';
 
 // TODO: Replace this with your own data model type
 export interface ProductsTableItem {
@@ -58,12 +59,24 @@ const EXAMPLE_DATA: ProductsTableItem[] = [
  * (including sorting, pagination, and filtering).
  */
 export class ProductsTableDataSource extends DataSource<ProductsTableItem> {
-  data: ProductsTableItem[] = EXAMPLE_DATA;
+  data: ProductsTableItem[];
   paginator: MatPaginator;
   sort: MatSort;
 
-  constructor() {
+  constructor(private productsApi: RequestServerService) {
     super();
+    this.productsApi.getProducts().subscribe((response: any) => {
+      this.data = [];
+      response.forEach((product: any) => {
+        this.data.push({
+          id: product.p_id,
+          name: product.p_name,
+          description: product.p_description,
+          category: product.p_category,
+          units: product.p_units
+        });
+      });
+    });
   }
 
   /**

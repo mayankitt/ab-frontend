@@ -7,9 +7,9 @@
       <div class="row">
         <div class="col">
           <mat-form-field class="full-width">
-            <mat-select placeholder="Product ID" formControlName="id">
-              <mat-option *ngFor="let id of productIds" [value]="id">
-                {{ id }}
+            <mat-select placeholder="Product ID" formControlName="id" [(value)]="selected">
+              <mat-option *ngFor="let product of products" [value]="product.id">
+                {{ product.id }}
               </mat-option>
             </mat-select>
             <mat-error *ngIf="updateForm.controls['id'].hasError('required')">
@@ -22,7 +22,7 @@
       <div class="row">
         <div class="col">
           <mat-form-field class="full-width">
-            <input matInput placeholder="Product Name" formControlName="name">
+            <input matInput placeholder="Product Name" formControlName="name" [value]="getProductObject(selected).name">
           </mat-form-field>
         </div>
       </div>
@@ -30,7 +30,7 @@
       <div class="row">
         <div class="col">
           <mat-form-field class="full-width">
-            <input matInput placeholder="Product Description" formControlName="description">
+            <input matInput placeholder="Product Description" formControlName="description" [value]="getProductObject(selected).description">
           </mat-form-field>
         </div>
       </div>
@@ -50,7 +50,7 @@
       <div class="row">
         <div class="col">
           <mat-form-field class="full-width">
-            <input matInput placeholder="Units" formControlName="units" type="number">
+            <input matInput placeholder="Units" formControlName="units" type="number" [value]="getProductObject(selected).units">
           </mat-form-field>
         </div>
       </div>
