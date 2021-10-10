@@ -13,7 +13,6 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatCardModule } from '@angular/material/card';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './login/login.component';
-import { AbNavComponent } from './ab-nav/ab-nav.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -23,14 +22,16 @@ import { ProductsTableComponent } from './products-table/products-table.componen
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
+import { MatTabsModule } from '@angular/material/tabs';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     UpdateProductComponent,
     LoginComponent,
-    AbNavComponent,
-    ProductsTableComponent
+    ProductsTableComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -49,6 +50,7 @@ import { MatSortModule } from '@angular/material/sort';
     MatIconModule,
     MatListModule,
     MatTableModule,
+    MatTabsModule,
     MatPaginatorModule,
     MatSortModule
   ],
