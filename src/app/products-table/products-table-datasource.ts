@@ -3,7 +3,6 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { map } from 'rxjs/operators';
 import { Observable, of as observableOf, merge } from 'rxjs';
-import { cpuUsage } from 'process';
 
 // TODO: Replace this with your own data model type
 export interface ProductsTableItem {
