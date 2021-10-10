@@ -2,9 +2,11 @@
   width: 100%;
 }
 
-.shipping-card {
+.update-card {
   min-width: 120px;
-  margin: 20px auto;
+  max-width: 700px;
+  margin: 2em auto 2em;
+  text-align: center;
 }
 
 .mat-radio-button {
@@ -24,4 +26,9 @@
 
 .col:last-child {
   margin-right: 0;
+}
+
+.field-enabler-checkbox {
+  width: 100px;
+  margin-right: 35em;
 }

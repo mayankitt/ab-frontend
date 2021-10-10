@@ -8,6 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UpdateProductComponent } from './update-product/update-product.component';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 import { MatSelectModule } from '@angular/material/select';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatCardModule } from '@angular/material/card';
@@ -40,6 +41,7 @@ import { HomeComponent } from './home/home.component';
     MatSliderModule,
     MatInputModule,
     MatButtonModule,
+    MatCheckboxModule,
     MatSelectModule,
     MatRadioModule,
     MatCardModule,

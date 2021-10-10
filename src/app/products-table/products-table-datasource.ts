@@ -3,35 +3,54 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { map } from 'rxjs/operators';
 import { Observable, of as observableOf, merge } from 'rxjs';
+import { cpuUsage } from 'process';
 
 // TODO: Replace this with your own data model type
 export interface ProductsTableItem {
   name: string;
-  id: number;
+  id: string;
+  description: string;
+  category: string;
+  units: number;
 }
 
 // TODO: replace this with real data from your application
 const EXAMPLE_DATA: ProductsTableItem[] = [
-  {id: 1, name: 'Hydrogen'},
-  {id: 2, name: 'Helium'},
-  {id: 3, name: 'Lithium'},
-  {id: 4, name: 'Beryllium'},
-  {id: 5, name: 'Boron'},
-  {id: 6, name: 'Carbon'},
-  {id: 7, name: 'Nitrogen'},
-  {id: 8, name: 'Oxygen'},
-  {id: 9, name: 'Fluorine'},
-  {id: 10, name: 'Neon'},
-  {id: 11, name: 'Sodium'},
-  {id: 12, name: 'Magnesium'},
-  {id: 13, name: 'Aluminum'},
-  {id: 14, name: 'Silicon'},
-  {id: 15, name: 'Phosphorus'},
-  {id: 16, name: 'Sulfur'},
-  {id: 17, name: 'Chlorine'},
-  {id: 18, name: 'Argon'},
-  {id: 19, name: 'Potassium'},
-  {id: 20, name: 'Calcium'},
+  {
+    id: 'P001',
+    name: 'A320',
+    description: 'A320 description',
+    category: 'Commercial',
+    units: 2
+  },
+  {
+    id: 'P002',
+    name: 'A380',
+    description: 'A380 description',
+    category: 'Commercial',
+    units: 3
+  },
+  {
+    id: 'P003',
+    name: 'Sentinel',
+    description: 'Sentinel description.',
+    category: 'Space',
+    units: 1
+  },
+  {
+    id: 'P004',
+    name: 'H135',
+    description: 'H135 description',
+    category: 'Helicopter',
+    units: 2
+  },
+  {
+    id: 'P005',
+    name: 'H125',
+    description: 'H125 description',
+    category: 'Helicopter',
+    units: 3
+  }
 ];
 
 /**
@@ -96,6 +115,9 @@ export class ProductsTableDataSource extends DataSource<ProductsTableItem> {
       switch (this.sort.active) {
         case 'name': return compare(a.name, b.name, isAsc);
         case 'id': return compare(+a.id, +b.id, isAsc);
+        case 'description': return compare(a.name, b.name, isAsc);
+        case 'category': return compare(a.category, b.category, isAsc);
+        case 'units': return compare(a.units, b.units, isAsc);
         default: return 0;
       }
     });
