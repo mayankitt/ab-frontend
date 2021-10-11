@@ -39,7 +39,7 @@ export class UpdateProductComponent implements OnInit {
     inputFields.forEach(element => this.updateForm.get(element).disable());
     this.productsApi.getProducts().subscribe((response: any) => {
       this.products = [];
-      response.forEach((product: any) => {
+      response.data.forEach((product: any) => {
         this.products.push({
           id: product.p_id,
           name: product.p_name,
@@ -102,10 +102,10 @@ export class UpdateProductComponent implements OnInit {
     if (this.selected) {
       this.productsApi.deleteProduct(this.selected).subscribe(resp => {
         console.log(resp);
-        alert('Product deleted successfully.');
+        alert(resp.message);
       }, error => {
         console.error(error);
-        alert('Product could not be deleted');
+        alert(error.message);
       });
     }
   }

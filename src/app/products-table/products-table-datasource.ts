@@ -67,7 +67,7 @@ export class ProductsTableDataSource extends DataSource<ProductsTableItem> {
     super();
     this.productsApi.getProducts().subscribe((response: any) => {
       this.data = [];
-      response.forEach((product: any) => {
+      response.data.forEach((product: any) => {
         this.data.push({
           id: product.p_id,
           name: product.p_name,
