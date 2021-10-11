@@ -1,7 +1,12 @@
 <div class="app-container">
     <mat-tab-group mat-align-tabs="center">
         <mat-tab label="Product List">
-            <app-products-table></app-products-table>
+            <ng-template matTabContent>
+                <app-products-table></app-products-table>
+            </ng-template>
+        </mat-tab>
+        <mat-tab label="Create Product">
+            <app-create-product></app-create-product>
         </mat-tab>
         <mat-tab label="Modify Product">
             <app-update-product></app-update-product>

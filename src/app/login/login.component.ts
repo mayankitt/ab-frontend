@@ -37,9 +37,13 @@ export class LoginComponent implements OnInit {
         this.loginForm.get('password').value).subscribe(
           (response: any) => {
             this.token = response.token;
-            localStorage.setItem('token', this.token);
-            localStorage.setItem('tokenExpiration', response.expiry);
-            this.router.navigate(['/home']);
+            if (this.token !== undefined && this.token !== null) {
+              localStorage.setItem('token', this.token);
+              localStorage.setItem('tokenExpiration', response.expiry);
+              this.router.navigate(['/home']);
+            } else {
+              alert('Incorrect credentials provided');
+            }
           }, error => {
             console.log(error);
             alert('Invalid credentials provided');

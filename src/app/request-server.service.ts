@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { environment } from 'src/environments/environment';
+import { environment } from '../environments/environment';
 import { ProductsTableItem } from './products-table/products-table-datasource';
 
 @Injectable({
@@ -13,11 +13,10 @@ export class RequestServerService {
   private loginEndpoint: string = environment.baseUrl + 'api/user/login';
   private getProductsEndpoint: string = environment.baseUrl + 'api/product/get_all';
   private updateProductEndpoint: string = environment.baseUrl + 'api/product/update';
+  private createProductEndPoint: string = environment.baseUrl + 'api/product/create';
+  private deleteProductEndPoint: string = environment.baseUrl + 'api/product/delete';
 
-  requestHeader = new HttpHeaders()
-                        .set('Access-Control-Allow-Origin', '*')
-                        .set('Authorization', localStorage.getItem('token'))
-                        .set('Content-Type', 'application/json');
+  requestHeaders: HttpHeaders;
 
   constructor(private http: HttpClient) { }
 
@@ -26,14 +25,45 @@ export class RequestServerService {
       email,
       password
     };
-    return this.http.post(this.loginEndpoint, requestBody, { headers: this.requestHeader });
+    this.requestHeaders = new HttpHeaders()
+                        .set('Access-Control-Allow-Origin', '*')
+                        .set('Content-Type', 'application/json');
+    return this.http.post(this.loginEndpoint, requestBody, { headers: this.requestHeaders });
   }
 
   getProducts(): Observable<any> {
-    return this.http.get(this.getProductsEndpoint, { headers: this.requestHeader });
+    this.requestHeaders = new HttpHeaders()
+                        .set('Access-Control-Allow-Origin', '*')
+                        .set('Authorization', localStorage.getItem('token'))
+                        .set('Content-Type', 'application/json');
+    return this.http.get(this.getProductsEndpoint, { headers: this.requestHeaders });
   }
 
   updateProduct(updatedProduct: ProductsTableItem): Observable<any> {
-    return this.http.put(this.updateProductEndpoint, updatedProduct, { headers: this.requestHeader });
+    this.requestHeaders = new HttpHeaders()
+                        .set('Access-Control-Allow-Origin', '*')
+                        .set('Authorization', localStorage.getItem('token'))
+                        .set('Content-Type', 'application/json');
+    return this.http.put(this.updateProductEndpoint, updatedProduct, { headers: this.requestHeaders });
   }
+
+  createProduct(requestBody: ProductsTableItem): Observable<any> {
+    this.requestHeaders = new HttpHeaders()
+                        .set('Access-Control-Allow-Origin', '*')
+                        .set('Authorization', localStorage.getItem('token'))
+                        .set('Content-Type', 'application/json');
+    return this.http.post(this.createProductEndPoint, requestBody, { headers: this.requestHeaders });
+  }
+
+  deleteProduct(selected: string): Observable<any> {
+    this.requestHeaders = new HttpHeaders()
+                        .set('Access-Control-Allow-Origin', '*')
+                        .set('Authorization', localStorage.getItem('token'))
+                        .set('Content-Type', 'application/json');
+    const requestBody = {
+      id: selected
+    };
+    return this.http.post(this.deleteProductEndPoint, requestBody, { headers: this.requestHeaders });
+  }
+
 }

@@ -56,7 +56,8 @@
       </div>
     </mat-card-content>
     <mat-card-actions>
-      <button mat-raised-button color="primary" [disabled]="!updateForm.valid" type="submit">Submit</button>
+      <button mat-raised-button color="primary" [disabled]="!updateForm.valid" type="submit">Update Product</button>
+      <a mat-raised-button color="warn" [disabled]="!selected" (click)="deleteProduct()">Delete</a>
     </mat-card-actions>
   </mat-card>
 </form>

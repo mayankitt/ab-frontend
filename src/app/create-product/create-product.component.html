@@ -1,0 +1,57 @@
+  <form [formGroup]="createForm" novalidate (ngSubmit)="onSubmit()">
+    <mat-card class="create-card">
+      <mat-card-header>
+        <mat-card-title>Create Product</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="full-width">
+              <input matInput placeholder="Product Name" formControlName="name">
+              <mat-error *ngIf="createForm.controls['name'].hasError('required')">
+                Product Name is <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="full-width">
+              <input matInput placeholder="Product Description" formControlName="description">
+              <mat-error *ngIf="createForm.controls['description'].hasError('required')">
+                Product Description is <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="full-width">
+              <mat-select placeholder="Product Category" formControlName="category">
+                <mat-option *ngFor="let c of categories" [value]="c.value">
+                  {{ c.name }}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="createForm.controls['category'].hasError('required')">
+                Product Category is <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="full-width">
+              <input matInput placeholder="Units" formControlName="units" type="number">
+              <mat-error *ngIf="createForm.controls['units'].hasError('required')">
+                Units is <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button color="primary" [disabled]="!createForm.valid" type="submit">Create Product</button>
+      </mat-card-actions>
+    </mat-card>
+  </form>
+  

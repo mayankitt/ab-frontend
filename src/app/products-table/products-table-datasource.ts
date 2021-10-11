@@ -8,7 +8,7 @@ import { RequestServerService } from '../request-server.service';
 // TODO: Replace this with your own data model type
 export interface ProductsTableItem {
   name: string;
-  id: string;
+  id?: string;
   description: string;
   category: string;
   units: number;

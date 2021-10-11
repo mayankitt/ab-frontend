@@ -26,6 +26,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatTabsModule } from '@angular/material/tabs';
 import { HomeComponent } from './home/home.component';
 import { HttpClientModule } from '@angular/common/http';
+import { CreateProductComponent } from './create-product/create-product.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { HttpClientModule } from '@angular/common/http';
     UpdateProductComponent,
     LoginComponent,
     ProductsTableComponent,
-    HomeComponent
+    HomeComponent,
+    CreateProductComponent
   ],
   imports: [
     BrowserModule,

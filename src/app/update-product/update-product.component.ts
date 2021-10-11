@@ -22,9 +22,9 @@ export class UpdateProductComponent implements OnInit {
   selected: any;
 
   categories = [
-    { name: 'Commercial', value: 'commercial' },
-    { name: 'Helicopter', value: 'helicopter' },
-    { name: 'Space', value: 'space' }
+    { name: 'Commercial', value: 'COMMERCIAL' },
+    { name: 'Helicopter', value: 'HELICOPTER' },
+    { name: 'Space', value: 'SPACE' }
   ];
 
   nameCbIsChecked = false;
@@ -96,5 +96,17 @@ export class UpdateProductComponent implements OnInit {
   changeInputControl(field: string, enable: boolean): void {
     const inputField = this.updateForm.get(field);
     enable ? inputField.enable() : inputField.disable();
+  }
+
+  deleteProduct() {
+    if (this.selected) {
+      this.productsApi.deleteProduct(this.selected).subscribe(resp => {
+        console.log(resp);
+        alert('Product deleted successfully.');
+      }, error => {
+        console.error(error);
+        alert('Product could not be deleted');
+      });
+    }
   }
 }
