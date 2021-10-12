@@ -1,0 +1,63 @@
+<form [formGroup]="updateForm" novalidate (ngSubmit)="onSubmit()">
+  <mat-card class="update-card">
+    <mat-card-header>
+      <mat-card-title>Update Product</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <mat-select placeholder="Product ID" formControlName="id" [(value)]="selected">
+              <mat-option *ngFor="let product of products" [value]="product.id">
+                {{ product.id }}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="updateForm.controls['id'].hasError('required')">
+              ID is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <mat-checkbox class="field-enabler-checkbox" (change)="changeInputControl('name', $event.checked)" [disabled]="this.updateForm.get('id').value==null">Edit Product Name</mat-checkbox>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Product Name" formControlName="name" [value]="getProductObject(selected).name">
+          </mat-form-field>
+        </div>
+      </div>
+      <mat-checkbox class="field-enabler-checkbox" (change)="changeInputControl('description', $event.checked)" [disabled]="this.updateForm.get('id').value==null">Edit Product Description</mat-checkbox>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Product Description" formControlName="description" [value]="getProductObject(selected).description">
+          </mat-form-field>
+        </div>
+      </div>
+      <mat-checkbox class="field-enabler-checkbox" (change)="changeInputControl('category', $event.checked)" [disabled]="this.updateForm.get('id').value==null">Edit Product Category</mat-checkbox>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <mat-select placeholder="Product Category" formControlName="category">
+              <mat-option *ngFor="let c of categories" [value]="c.value">
+                {{ c.name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+      <mat-checkbox class="field-enabler-checkbox" (change)="changeInputControl('units', $event.checked)" [disabled]="this.updateForm.get('id').value==null">Edit Units in Inventory</mat-checkbox>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Units" formControlName="units" type="number" [value]="getProductObject(selected).units">
+          </mat-form-field>
+        </div>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" [disabled]="!updateForm.valid" type="submit">Update Product</button>
+      <a mat-raised-button color="warn" [disabled]="!selected" (click)="deleteProduct()">Delete</a>
+    </mat-card-actions>
+  </mat-card>
+</form>
