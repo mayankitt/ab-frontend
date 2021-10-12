@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { ProductsTableItem } from '../products-table/products-table-datasource';
 import { RequestServerService } from '../request-server.service';
@@ -25,7 +26,8 @@ export class CreateProductComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
               private productsApi: RequestServerService,
-              private router: Router) {}
+              private router: Router,
+              private snackBar: MatSnackBar) {}
 
   ngOnInit() {
   }
@@ -40,13 +42,15 @@ export class CreateProductComponent implements OnInit {
       };
       this.productsApi.createProduct(requestBody).subscribe(resp => {
         console.log(resp);
-        alert('Product created successfully.');
+        this.snackBar.open(resp.message, 'Ok', {
+          duration: 3000
+        });
       }, error => {
         console.error(error);
-        alert('Product could not be created');
+        this.snackBar.open('Product could not be created', 'Ok');
       });
     } else {
-      alert('Unable to submit create data');
+      this.snackBar.open('Data not valid for submission.', 'Ok');
     }
   }
 

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ProductsTableItem } from '../products-table/products-table-datasource';
 import { RequestServerService } from '../request-server.service';
 
@@ -32,7 +33,9 @@ export class UpdateProductComponent implements OnInit {
   categoryCbIsChecked = false;
   unitsCbIsChecked = false;
 
-  constructor(private fb: FormBuilder, private productsApi: RequestServerService) {}
+  constructor(private fb: FormBuilder,
+              private productsApi: RequestServerService,
+              private snackBar: MatSnackBar) {}
 
   ngOnInit() {
     const inputFields = ['name', 'description', 'category', 'units'];
@@ -70,10 +73,18 @@ export class UpdateProductComponent implements OnInit {
       };
       this.productsApi.updateProduct(requestBody).subscribe(resp => {
         console.log(resp);
-        alert('Product updated successfully.');
+        this.snackBar.open('Product updated successfully', 'Ok', {
+          duration: 3000
+        });
       }, error => {
         console.error(error);
-        alert('Product could not be updated');
+        let messageToShow = 'Product could not be updated.';
+        if (error.message) {
+          messageToShow += error.message;
+        }
+        this.snackBar.open(messageToShow, 'Ok', {
+          duration: 4000
+        });
       });
     } else {
       alert('Unable to submit update data');
@@ -102,10 +113,14 @@ export class UpdateProductComponent implements OnInit {
     if (this.selected) {
       this.productsApi.deleteProduct(this.selected).subscribe(resp => {
         console.log(resp);
-        alert(resp.message);
+        this.snackBar.open(resp.message, 'Ok', {
+          duration: 3000
+        });
       }, error => {
         console.error(error);
-        alert(error.message);
+        this.snackBar.open(error.message, 'Ok', {
+          duration: 5000
+        });
       });
     }
   }

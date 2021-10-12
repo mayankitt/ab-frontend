@@ -15,6 +15,7 @@ export class RequestServerService {
   private updateProductEndpoint: string = environment.baseUrl + 'api/product/update';
   private createProductEndPoint: string = environment.baseUrl + 'api/product/create';
   private deleteProductEndPoint: string = environment.baseUrl + 'api/product/delete';
+  private getProductsByCategoryEndpoint: string = environment.baseUrl + 'api/product/get_by_category';
 
   requestHeaders: HttpHeaders;
 
@@ -64,6 +65,15 @@ export class RequestServerService {
       id: selected
     };
     return this.http.post(this.deleteProductEndPoint, requestBody, { headers: this.requestHeaders });
+  }
+
+  getProductsByCategory(selectedCategory: string): Observable<any> {
+    this.requestHeaders = new HttpHeaders()
+                        .set('Access-Control-Allow-Origin', '*')
+                        .set('Authorization', localStorage.getItem('token'))
+                        .set('Content-Type', 'application/json');
+    const getByCategoryFinalUrl = this.getProductsByCategoryEndpoint + '?category=' + selectedCategory;
+    return this.http.get(getByCategoryFinalUrl, { headers: this.requestHeaders });
   }
 
 }

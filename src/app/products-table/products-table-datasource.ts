@@ -65,6 +65,10 @@ export class ProductsTableDataSource extends DataSource<ProductsTableItem> {
 
   constructor(private productsApi: RequestServerService) {
     super();
+    this.getAllProducts();
+  }
+
+  getAllProducts() {
     this.productsApi.getProducts().subscribe((response: any) => {
       this.data = [];
       response.data.forEach((product: any) => {

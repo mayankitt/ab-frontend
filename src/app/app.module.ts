@@ -23,6 +23,7 @@ import { ProductsTableComponent } from './products-table/products-table.componen
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTabsModule } from '@angular/material/tabs';
 import { HomeComponent } from './home/home.component';
 import { HttpClientModule } from '@angular/common/http';
@@ -58,6 +59,7 @@ import { CreateProductComponent } from './create-product/create-product.componen
     MatTabsModule,
     MatPaginatorModule,
     MatSortModule,
+    MatSnackBarModule,
     HttpClientModule
   ],
   providers: [],
